@@ -15,9 +15,7 @@ return new class extends Migration
             $table->bigIncrements('id');  
             $table->unsignedBigInteger('produto_id');           
 
-            $table->string('nome');
-            $table->float('preco',10,2);
-            $table->string('variacoes');
+             $table->integer('quantidade');
             
             $table->timestamps();   
             

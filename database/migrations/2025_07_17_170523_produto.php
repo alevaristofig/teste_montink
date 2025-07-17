@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('produtos', function (Blueprint $table) {
             $table->bigIncrements('id');            
 
-            $table->integer('quantidade');
+            $table->string('nome');
+            $table->float('preco',10,2);
+            $table->string('variacoes');           
                        
             $table->timestamps();      
         });          
