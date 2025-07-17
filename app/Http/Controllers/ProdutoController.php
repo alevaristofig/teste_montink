@@ -15,6 +15,13 @@ class ProdutoController extends Controller
         $this->service = $service;
     }
 
+    public function listar(): JsonResponse
+    {
+        $result = $this->service->listar();
+
+        return response()->json($result,200);
+    }
+
     public function salvar(ProdutoRequest $request): JsonResponse
     {
         $result = $this->service->salvar($request);

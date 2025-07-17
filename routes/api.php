@@ -14,6 +14,7 @@ Route::prefix('erp_gerenciamento')->group(function() {
         'as' => 'produto'
        // 'middleware'=> \Tymon\JWTAuth\Http\Middleware\Authenticate::class
     ], function() {      
+        Route::get('/produto',[ProdutoController::class,'listar']);
         Route::post('/produto',[ProdutoController::class,'salvar']);
     });
 

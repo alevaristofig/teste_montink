@@ -20,6 +20,16 @@
             $this->model = $model;
             $this->serviceEstoque = $serviceEstoque;
         }
+
+         public function listar(): Collection 
+         {
+            try {
+                return $this->model->all();
+            } catch(\Exception $e) {
+                $message = new ApiMessages("Ocorreu um erro, a operção não foi realizada",$e->getMessage());
+                return response()->json(['error' => $message->getMessage()], 500);
+            }
+        }
         
         public function salvar(ProdutoRequest $request): JsonResponse {
            
@@ -51,25 +61,6 @@
                 $message = new ApiMessages("Ocorreu um erro, a operção não foi realizada",$e->getMessage());
                 return response()->json(['error' => $message->getMessage()], 500);
             } 
-        }
-
-        public function listar(): Collection {
-            try {
-
-                
-              /*  if(auth('api')->user()->tipo == 'A') {
-                    return $this->model->all();
-                }
-
-                $produto = $this->model->whereHas('fornecedor.fornecedorUsuario', function ($query) {
-                    $query->where('usuario_id', auth('api')->user()->id);
-                })->with(['fornecedor'])->get();
-
-                return $produto;*/
-                
-            } catch(\Exception $e) {
-                dd($e);
-            }
         }
 
         public function buscar(int $id): Produtos {
