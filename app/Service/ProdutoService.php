@@ -64,7 +64,7 @@
             } 
         }
 
-        public function buscar(int $id): JsonResponse | null 
+        public function buscar(int $id): JsonResponse 
         {
             try {
                 $produto = $this->model->find($id);
