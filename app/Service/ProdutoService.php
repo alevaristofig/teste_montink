@@ -22,7 +22,8 @@
         }
         
         public function salvar(ProdutoRequest $request): Produto {
-            try {       
+            dd($request->all());
+           /* try {       
                 DB::beginTransaction();
 
                 $produto = $this->model->create($request->all());  
@@ -33,7 +34,7 @@
             } catch(\Exception $e) {
                 DB::rollBack();
                 dd($e->getMessage());
-            }
+            }*/
         }
 
         public function listar(): Collection {

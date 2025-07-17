@@ -17,7 +17,7 @@ class ProdutoController extends Controller
 
     public function salvar(ProdutoRequest $request): JsonResponse
     {
-       // $result = $this->service->salvar($request);
+        $result = $this->service->salvar($request);
 
       //  return response()->json($result,201);
 
