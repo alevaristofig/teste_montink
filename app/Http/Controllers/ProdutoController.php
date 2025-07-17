@@ -22,6 +22,11 @@ class ProdutoController extends Controller
         return response()->json($result,200);
     }
 
+    public function buscar(int $id): JsonResponse
+    {
+        return $this->service->buscar($id);
+    }
+
     public function salvar(ProdutoRequest $request): JsonResponse
     {
         $result = $this->service->salvar($request);

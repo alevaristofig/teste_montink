@@ -17,6 +17,7 @@ Route::prefix('erp_gerenciamento')->group(function() {
         Route::get('/produto',[ProdutoController::class,'listar']);
         Route::post('/produto',[ProdutoController::class,'salvar']);
         Route::put('/produto/{id}',[ProdutoController::class,'atualizar']);
+        Route::get('/produto/{id}',[ProdutoController::class,'buscar']);
     });
 
     Route::group([

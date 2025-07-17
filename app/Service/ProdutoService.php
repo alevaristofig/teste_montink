@@ -64,11 +64,15 @@
             } 
         }
 
-        public function buscar(int $id): Produtos {
+        public function buscar(int $id): JsonResponse | null 
+        {
             try {
-                return $this->model->find($id);
+                $produto = $this->model->find($id);
+
+                return response()->json($produto, 200);
             } catch(\Exception $e) {
-                dd($e);
+                $message = new ApiMessages("Ocorreu um erro, a operção não foi realizada",$e->getMessage());
+                return response()->json(['error' => $message->getMessage()], 500);
             }
         }
 

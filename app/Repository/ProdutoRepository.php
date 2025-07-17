@@ -12,6 +12,6 @@
         public function salvar(ProdutoRequest $request): JsonResponse;
         public function listar(): Collection;
         public function atualizar(int $id, ProdutoRequest $request): JsonResponse;
-       /* public function buscar(int $id): Produto;        
-        public function deletar(int $id): void;*/
+        public function buscar(int $id): Produto;        
+       // public function deletar(int $id): void;*/
     }
