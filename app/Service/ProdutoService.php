@@ -5,22 +5,33 @@
     use App\Repository\ProdutoRepository;
     use App\Http\Requests\ProdutoRequest;
     use App\Models\Produto;
+   // use App\Models\Estoque;
     use Illuminate\Http\JsonResponse;
     use Illuminate\Database\Eloquent\Collection;
     use Illuminate\Pagination\LengthAwarePaginator;
+    use Illuminate\Support\Facades\DB;
 
     class ProdutoService implements ProdutoRepository {
 
         private $model;
+        private $serviceEstoque;
 
-        public function __construct(Produto $model) {
+        public function __construct(Produto $model, EstoqueService $serviceEstoque) {
             $this->model = $model;
+            $this->serviceEstoque = $serviceEstoque;
         }
         
         public function salvar(ProdutoRequest $request): Produto {
-            try {                                
-                return $this->model->create($request->all());             
+            try {       
+                DB::beginTransaction();
+
+                $produto = $this->model->create($request->all());  
+
+                $this->serviceEstoque->salvar();
+                
+                DB::commit();
             } catch(\Exception $e) {
+                DB::rollBack();
                 dd($e->getMessage());
             }
         }
