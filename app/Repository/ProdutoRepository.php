@@ -3,10 +3,9 @@
     namespace App\Repository;
 
     use App\Http\Requests\ProdutoRequest;
-    use App\Models\Produtos;
+    use App\Models\Produto;
     use Illuminate\Http\JsonResponse;
     use Illuminate\Database\Eloquent\Collection;
-    use Illuminate\Pagination\LengthAwarePaginator;
 
     interface ProdutoRepository {
         
