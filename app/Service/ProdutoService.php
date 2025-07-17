@@ -22,19 +22,36 @@
         }
         
         public function salvar(ProdutoRequest $request): Produto {
-            dd($request->all());
-           /* try {       
+           
+            try {       
                 DB::beginTransaction();
 
-                $produto = $this->model->create($request->all());  
+                $dados = $request->all();
 
-                $this->serviceEstoque->salvar();
+                $produto = [
+                    'nome' => $dados['nome'],
+                    'preco' => $dados['preco'],
+                    'variacoes' => $dados['variacoes'], 
+                ];
+                                
+                //dd($dados['estoque']);exit;
+
+                $produto = $this->model->create($produto);  
+
+                $estoque = [
+                    'produto_id' => $produto['id'],
+                    'quantidade' => $dados['estoque']['quantidade']
+                ];
+
+                $this->serviceEstoque->salvar($estoque);
                 
                 DB::commit();
+
+                return $produto;
             } catch(\Exception $e) {
-                DB::rollBack();
-                dd($e->getMessage());
-            }*/
+                DB::rollBack();               
+                dd('entrou erro service');
+            } 
         }
 
         public function listar(): Collection {

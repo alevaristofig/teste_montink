@@ -24,7 +24,8 @@ class ProdutoRequest extends FormRequest
         return [
             'nome' => 'required',
             'preco' => 'required|numeric',
-            'variacoes' => 'required'
+            'variacoes' => 'required',
+            'estoque' => 'required'
         ];
     }
 }

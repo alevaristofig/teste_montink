@@ -17,11 +17,11 @@
             $this->model = $model;
         }
 
-        public function salvar(EstoqueRequest $request): Estoque {
-             try {                                
-                return $this->model->create($request->all());             
+        public function salvar(Array $dados): void {
+             try {                                            
+                $this->model->create($dados);             
             } catch(\Exception $e) {
-                dd($e->getMessage());
+                dd('entrou');
             }
         }
     }

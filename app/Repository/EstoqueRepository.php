@@ -9,7 +9,7 @@
 
     interface EstoqueRepository {
         
-        public function salvar(EstoqueRequest $request): Estoque;
+        public function salvar(Array $request): void;
         /*public function listar(): Collection;
         public function buscar(int $id): Produtos;
         public function atualizar(int $id, ProdutoRequest $request): Produtos;
