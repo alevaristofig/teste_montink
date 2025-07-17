@@ -86,7 +86,16 @@
 
                 $produto->save();
 
-               return response()->json($produto, 201);
+                $estoque = [
+                    'produto_id' => $id,
+                    'quantidade' => $dados['estoque']['quantidade']
+                ];
+
+                if(!$this->serviceEstoque->atualizar($id, $estoque)) {
+                    throw new \Exception();
+                }
+
+                return response()->json($produto, 200);
                             
             } catch(\Exception $e) {
                 $message = new ApiMessages("Ocorreu um erro, a operção não foi realizada",$e->getMessage());
