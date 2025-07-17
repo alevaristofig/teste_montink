@@ -31,7 +31,8 @@
             }
         }
         
-        public function salvar(ProdutoRequest $request): JsonResponse {
+        public function salvar(ProdutoRequest $request): JsonResponse 
+        {
            
             try {       
                 DB::beginTransaction();
@@ -71,22 +72,24 @@
             }
         }
 
-        public function atualizar(int $id, ProdutoRequest $request): Produtos {
+        public function atualizar(int $id, ProdutoRequest $request): Produto {
             try {
                 
                 $produto = $this->model->find($id);
 
-                $produto->referencia = $request->referencia;
-                $produto->nome = $request->nome;
-                $produto->cor = $request->cor;
-                $produto->preco = $request->preco;
+                $dados = $request->all();
+
+                $produto->nome = $dados->nome;
+                $produto->preco = $dados->preco;
+                $produto->variacoes = $dados->variacoes;
 
                 $produto->save();
 
                 return $produto;
                             
             } catch(\Exception $e) {
-                dd($e);
+                $message = new ApiMessages("Ocorreu um erro, a operção não foi realizada",$e->getMessage());
+                return response()->json(['error' => $message->getMessage()], 500);
             }
         }
 
