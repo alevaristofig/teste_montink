@@ -16,7 +16,7 @@ class CupomController extends Controller
     }
 
     public function salvar(CupomRequest $request): JsonResponse
-    {
+    {        
         $result = $this->service->salvar($request);
 
        return $result;

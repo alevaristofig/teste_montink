@@ -9,7 +9,7 @@
     use Illuminate\Database\Eloquent\Collection;
     use App\Exceptions\ApiMessages;
 
-    class EstoqueService implements CupomRepository {
+    class CupomService implements CupomRepository {
 
         private $model;
 
@@ -18,8 +18,8 @@
         }
 
         public function salvar(CupomRequest $dados): JsonResponse {
-             try {                                            
-                $cupom = $this->model->create($dados);   
+             try {                                                      
+                $cupom = $this->model->create($dados->all());   
                 
                 return response()->json($cupom, 201);
             } catch(\Exception $e) {
