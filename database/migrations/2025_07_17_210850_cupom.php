@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('produtos', function (Blueprint $table) {
+         Schema::create('cupons', function (Blueprint $table) {
             $table->bigIncrements('id');            
 
             $table->string('nome');
-            $table->float('preco',10,2);
-            $table->string('variacoes');           
+            $table->float('desconto',10,2);
+            $table->date('validade');           
                        
             $table->timestamps();      
-        });          
+        });   
     }
 
     /**
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('produtos');
+        Schema::dropIfExists('cupons');
     }
 };
