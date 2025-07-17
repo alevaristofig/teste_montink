@@ -56,7 +56,7 @@
                 
                 DB::commit();
 
-                return response()->json($produto, 201);;
+                return response()->json($produto, 201);
             } catch(\Exception $e) {
                 DB::rollBack();               
                 $message = new ApiMessages("Ocorreu um erro, a operção não foi realizada",$e->getMessage());
@@ -72,20 +72,21 @@
             }
         }
 
-        public function atualizar(int $id, ProdutoRequest $request): Produto {
+        public function atualizar(int $id, ProdutoRequest $request): JsonResponse 
+        {
             try {
                 
                 $produto = $this->model->find($id);
 
                 $dados = $request->all();
 
-                $produto->nome = $dados->nome;
-                $produto->preco = $dados->preco;
-                $produto->variacoes = $dados->variacoes;
+                $produto->nome = $dados['nome'];
+                $produto->preco = $dados['preco'];
+                $produto->variacoes = $dados['variacoes'];
 
                 $produto->save();
 
-                return $produto;
+               return response()->json($produto, 201);
                             
             } catch(\Exception $e) {
                 $message = new ApiMessages("Ocorreu um erro, a operção não foi realizada",$e->getMessage());

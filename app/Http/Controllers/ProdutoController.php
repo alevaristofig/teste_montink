@@ -29,7 +29,7 @@ class ProdutoController extends Controller
        return $result;
     }
 
-    public function update(ProdutoRequest $request, int $id): JsonResponse
+    public function atualizar(ProdutoRequest $request, int $id): JsonResponse
     {
         $result = $this->service->atualizar($id, $request);
 
