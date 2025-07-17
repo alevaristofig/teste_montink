@@ -2,14 +2,14 @@
 
     namespace App\Service;
 
-    use App\Repository\ProdutoRepository;
-    use App\Http\Requests\ProdutoRequest;
-    use App\Models\Produto;
-   // use App\Models\Estoque;
     use Illuminate\Http\JsonResponse;
     use Illuminate\Database\Eloquent\Collection;
     use Illuminate\Pagination\LengthAwarePaginator;
     use Illuminate\Support\Facades\DB;
+    use App\Repository\ProdutoRepository;
+    use App\Http\Requests\ProdutoRequest;
+    use App\Models\Produto;
+    use App\Exceptions\ApiMessages;
 
     class ProdutoService implements ProdutoRepository {
 
@@ -21,7 +21,7 @@
             $this->serviceEstoque = $serviceEstoque;
         }
         
-        public function salvar(ProdutoRequest $request): Produto {
+        public function salvar(ProdutoRequest $request): JsonResponse {
            
             try {       
                 DB::beginTransaction();
@@ -29,12 +29,10 @@
                 $dados = $request->all();
 
                 $produto = [
-                    'nome' => $dados['nome'],
+                    'nomez' => $dados['nome'],
                     'preco' => $dados['preco'],
                     'variacoes' => $dados['variacoes'], 
-                ];
-                                
-                //dd($dados['estoque']);exit;
+                ];                                                
 
                 $produto = $this->model->create($produto);  
 
@@ -47,10 +45,11 @@
                 
                 DB::commit();
 
-                return $produto;
+                return response()->json($produto, 201);;
             } catch(\Exception $e) {
                 DB::rollBack();               
-                dd('entrou erro service');
+                $message = new ApiMessages("Ocorreu um erro, a operção não foi realizada",$e->getMessage());
+                return response()->json(['error' => $message->getMessage()], 500);
             } 
         }
 

@@ -7,7 +7,7 @@
     use App\Models\Estoque;
     use Illuminate\Http\JsonResponse;
     use Illuminate\Database\Eloquent\Collection;
-    use Illuminate\Pagination\LengthAwarePaginator;
+    use App\Exceptions\ApiMessages;
 
     class EstoqueService implements EstoqueRepository {
 
@@ -21,7 +21,8 @@
              try {                                            
                 $this->model->create($dados);             
             } catch(\Exception $e) {
-                dd('entrou');
+                $message = new ApiMessages("Ocorreu um erro, a operção não foi realizada",$e->getMessage());
+                response()->json(['error' => $message->getMessage()], 500);
             }
         }
     }

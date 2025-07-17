@@ -19,6 +19,6 @@ class ProdutoController extends Controller
     {
         $result = $this->service->salvar($request);
 
-       return response()->json($result,201);
+       return $result;
     }
 }
