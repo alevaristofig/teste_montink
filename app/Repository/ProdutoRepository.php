@@ -13,5 +13,5 @@
         public function listar(): Collection;
         public function atualizar(int $id, ProdutoRequest $request): JsonResponse;
         public function buscar(int $id): JsonResponse;        
-       // public function deletar(int $id): void;*/
+        public function deletar(int $id): JsonResponse;
     }

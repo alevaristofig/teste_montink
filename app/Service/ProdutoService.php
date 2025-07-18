@@ -107,13 +107,16 @@
             }
         }
 
-        public function deletar(int $id): void {
+        public function deletar(int $id): JsonResponse {
             try {
                 $produto = $this->model->find($id);
 
                 $produto->delete();
+
+                return response()->json(['msg' => "Produto Removido Com Sucesso"], 204);
             } catch(\Exception $e) {
-                dd($e);
+                $message = new ApiMessages("Ocorreu um erro, a operção não foi realizada",$e->getMessage());
+                return response()->json(['error' => $message->getMessage()], 500);
             }
         }
     }
