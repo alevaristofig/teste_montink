@@ -30,5 +30,6 @@ class PedidoTest extends TestCase
 
         $this->assertEquals(169.2,$result->valor_total);
         $this->assertEquals(1,$result->id_user);
+        $this->assertNotNull($result);
     }
 }
