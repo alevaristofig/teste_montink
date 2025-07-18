@@ -26,15 +26,13 @@
         {
             try {
                     $carrinho = Redis::hgetall($this->nomeCarrinho); 
-                    
+                   
                     if (count($carrinho) == 0) 
                     {
                         return response()->json([], 200);
-                    }
-
-                    $produtos = json_decode($carrinho['produtos']);    
+                    }  
                 
-                    return response()->json($produtos, 200);
+                    return response()->json($carrinho, 200);
             } catch(\Exception $e) {
                 $message = new ApiMessages("Ocorreu um erro, a operção não foi realizada",$e->getMessage());
                 response()->json(['error' => $message->getMessage()], 500);
@@ -44,12 +42,24 @@
         public function realizarPedidos(PedidoRequest $dados): JsonResponse
         {
             try {
-               // $carrinho = Redis::hgetall($this->nomeCarrinho); 
+                    $carrinho = '';
+                    $pedido = Redis::hgetall($this->nomeCarrinho); 
+                    $dados = $dados->all();
+                    $dados['valor_total'] = $dados['valor_total'] * $dados['quantidade'];
 
-                dd($dados);
+                    if(count($pedido) === 0) 
+                    {    
+                        $carrinho = $dados;                      
+                    } else {
+                        dd('nao');
+                    }
+
+                    Redis::hmset($this->nomeCarrinho,$carrinho);
+
+                    return response()->json(['msg' => "Produto adicionado com Sucesso"], 200); 
             } catch(\Exception $e) {
                 $message = new ApiMessages("Ocorreu um erro, a operção não foi realizada",$e->getMessage());
-                response()->json(['error' => $message->getMessage()], 500);
+                return response()->json(['error' => $message->getMessage()], 500);
             }
         }
     }
