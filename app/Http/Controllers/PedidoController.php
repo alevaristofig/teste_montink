@@ -14,4 +14,9 @@ class PedidoController extends Controller
     {
         $this->service = $service;
     }
+
+    public function listar(): JsonResponse
+    {
+        return $this->service->listarPedidos();        
+    }
 }

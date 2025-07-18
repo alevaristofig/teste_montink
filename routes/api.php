@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\CupomController;
+use App\Http\Controllers\PedidoController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -26,5 +27,12 @@ Route::prefix('erp_gerenciamento')->group(function() {
        // 'middleware'=> \Tymon\JWTAuth\Http\Middleware\Authenticate::class
     ], function() {      
         Route::post('/cupom',[CupomController::class,'salvar']);
+    });
+
+     Route::group([
+        'as' => 'pedido'
+       // 'middleware'=> \Tymon\JWTAuth\Http\Middleware\Authenticate::class
+    ], function() {      
+        Route::get('/pedido',[PedidoController::class,'listar']);
     });
 });

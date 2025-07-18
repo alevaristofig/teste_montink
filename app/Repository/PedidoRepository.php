@@ -11,7 +11,7 @@
         
        // public function salvar(Array $request): void;
        // public function atualizar(int $id, Array $request): bool;
-        public function listar(): Collection;
+        public function listarPedidos(): JsonResponse;
         /*public function buscar(int $id): Produtos;        
         public function deletar(int $id): void;*/
     }
