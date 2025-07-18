@@ -110,7 +110,8 @@
         public function deletar(int $id): JsonResponse {
             try {
                 $produto = $this->model->find($id);
-
+dd($produto->estoques()->delete());exit;
+                $produto->estoques()->delete();
                 $produto->delete();
 
                 return response()->json(['msg' => "Produto Removido Com Sucesso"], 204);
