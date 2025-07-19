@@ -20,6 +20,11 @@ class CupomController extends Controller
         return $this->service->listar(); 
     }
 
+    public function buscar(int $id): JsonResponse
+    {
+        return $this->service->buscar($id);
+    }
+
     public function salvar(CupomRequest $request): JsonResponse
     {        
         $result = $this->service->salvar($request);

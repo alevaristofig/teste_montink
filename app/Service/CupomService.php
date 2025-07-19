@@ -29,6 +29,18 @@
             }
         }
 
+        public function buscar(int $id): JsonResponse 
+        {
+            try {                
+                $cupom = $this->model->find($id);
+
+                return response()->json($cupom, 200);
+            } catch(\Exception $e) {
+                $message = new ApiMessages("Ocorreu um erro, a operção não foi realizada",$e->getMessage());
+                return response()->json(['error' => $message->getMessage()], 500);
+            }
+        }
+
         public function salvar(CupomRequest $dados): JsonResponse {
              try {                                                      
                 $cupom = $this->model->create($dados->all());   

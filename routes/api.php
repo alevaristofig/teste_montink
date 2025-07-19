@@ -27,6 +27,7 @@ Route::prefix('erp_gerenciamento')->group(function() {
        // 'middleware'=> \Tymon\JWTAuth\Http\Middleware\Authenticate::class
     ], function() {      
         Route::get('/cupom',[CupomController::class,'listar']);
+        Route::get('/cupom/{id}',[CupomController::class,'buscar']);
         Route::post('/cupom',[CupomController::class,'salvar']);
     });
 
