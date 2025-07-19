@@ -30,6 +30,7 @@ Route::prefix('erp_gerenciamento')->group(function() {
         Route::get('/cupom/{id}',[CupomController::class,'buscar']);
         Route::post('/cupom',[CupomController::class,'salvar']);
         Route::put('/cupom/{id}',[CupomController::class,'atualizar']);
+        Route::delete('/cupom/{id}',[CupomController::class,'deletar']);
     });
 
      Route::group([

@@ -110,7 +110,8 @@
             }
         }
 
-        public function deletar(int $id): JsonResponse {
+        public function deletar(int $id): JsonResponse 
+        {
             try {
                 $produto = $this->model->find($id);
 

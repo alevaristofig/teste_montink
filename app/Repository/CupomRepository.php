@@ -13,5 +13,5 @@
         public function listar(): JsonResponse;
         public function buscar(int $id): JsonResponse;
         public function atualizar(int $id, CupomRequest $request): JsonResponse;
-       // public function deletar(int $id): void;*/
+        public function deletar(int $id): JsonResponse;
     }

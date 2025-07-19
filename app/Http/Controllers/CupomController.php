@@ -36,4 +36,9 @@ class CupomController extends Controller
     {
         return $this->service->atualizar($id, $request);
     }
+
+    public function deletar(int $id): JsonResponse
+    {
+        return $this->service->deletar($id);
+    }
 }

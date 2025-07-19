@@ -74,4 +74,18 @@
                 return response()->json(['error' => $message->getMessage()], 500);
             }
         }
+
+        public function deletar(int $id): JsonResponse 
+        {
+            try {
+                $cupom = $this->model->find($id);
+                
+                $cupom->delete();
+
+                return response()->json(['msg' => "Cupom Removido Com Sucesso"], 204);
+            } catch(\Exception $e) {
+                $message = new ApiMessages("Ocorreu um erro, a operção não foi realizada",$e->getMessage());
+                return response()->json(['error' => $message->getMessage()], 500);
+            }
+        }
     }
