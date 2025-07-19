@@ -17,9 +17,7 @@ class ProdutoController extends Controller
 
     public function listar(): JsonResponse
     {
-        $result = $this->service->listar();
-
-        return response()->json($result,200);
+        return $this->service->listar(); 
     }
 
     public function buscar(int $id): JsonResponse

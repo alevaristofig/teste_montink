@@ -21,10 +21,12 @@
             $this->serviceEstoque = $serviceEstoque;
         }
 
-         public function listar(): Collection 
+         public function listar(): JsonResponse 
          {
             try {
-                return $this->model->all();
+                $produtos = $this->model->with('estoques:produto_id,quantidade')->get();
+
+                return response()->json($produtos,200);
             } catch(\Exception $e) {
                 $message = new ApiMessages("Ocorreu um erro, a operção não foi realizada",$e->getMessage());
                 return response()->json(['error' => $message->getMessage()], 500);
@@ -32,15 +34,14 @@
         }
         
         public function salvar(ProdutoRequest $request): JsonResponse 
-        {
-           
+        {           
             try {       
                 DB::beginTransaction();
 
                 $dados = $request->all();
 
                 $produto = [
-                    'nomez' => $dados['nome'],
+                    'nome' => $dados['nome'],
                     'preco' => $dados['preco'],
                     'variacoes' => $dados['variacoes'], 
                 ];                                                

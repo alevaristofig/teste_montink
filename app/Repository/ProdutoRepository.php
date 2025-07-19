@@ -10,7 +10,7 @@
     interface ProdutoRepository {
         
         public function salvar(ProdutoRequest $request): JsonResponse;
-        public function listar(): Collection;
+        public function listar(): JsonResponse;
         public function atualizar(int $id, ProdutoRequest $request): JsonResponse;
         public function buscar(int $id): JsonResponse;        
         public function deletar(int $id): JsonResponse;

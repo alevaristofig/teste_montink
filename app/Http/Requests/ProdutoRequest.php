@@ -28,4 +28,14 @@ class ProdutoRequest extends FormRequest
             'estoque' => 'required'
         ];
     }
+
+    public function messages()
+    {
+        return [           
+            'nome.required'  => 'O campo nome não pode ficar em branco',
+            'preço.required'  => 'O campo preço não pode ficar em branco',
+            'variacoes.required'  => 'O campo variações não pode ficar em branco',
+            'estoque.required'  => 'É preciso enviar o estoque',
+        ];
+    }
 }

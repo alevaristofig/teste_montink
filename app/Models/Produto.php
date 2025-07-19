@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Produto extends Model
 {
@@ -11,7 +11,7 @@ class Produto extends Model
         'nome', 'preco', 'variacoes'
     ];
 
-    public function estoques(): BelongsTo {
-        return $this->belongsTo(Estoque::class);
+    public function estoques(): HasOne {
+        return $this->hasOne(Estoque::class);
     }
 }
