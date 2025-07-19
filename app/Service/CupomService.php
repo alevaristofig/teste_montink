@@ -17,6 +17,18 @@
             $this->model = $model;
         }
 
+        public function listar(): JsonResponse 
+         {
+            try {
+                $cupons = $this->model->all();
+
+                return response()->json($cupons,200);
+            } catch(\Exception $e) {
+                $message = new ApiMessages("Ocorreu um erro, a operção não foi realizada",$e->getMessage());
+                return response()->json(['error' => $message->getMessage()], 500);
+            }
+        }
+
         public function salvar(CupomRequest $dados): JsonResponse {
              try {                                                      
                 $cupom = $this->model->create($dados->all());   

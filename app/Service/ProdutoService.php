@@ -67,8 +67,10 @@
 
         public function buscar(int $id): JsonResponse 
         {
-            try {
-                $produto = $this->model->find($id);
+            try {                
+                $produto = $this->model->with('estoques:produto_id,quantidade')
+                    ->where('id', $id)
+                    ->get();
 
                 return response()->json($produto, 200);
             } catch(\Exception $e) {

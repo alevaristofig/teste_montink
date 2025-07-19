@@ -26,6 +26,7 @@ Route::prefix('erp_gerenciamento')->group(function() {
         'as' => 'cupom'
        // 'middleware'=> \Tymon\JWTAuth\Http\Middleware\Authenticate::class
     ], function() {      
+        Route::get('/cupom',[CupomController::class,'listar']);
         Route::post('/cupom',[CupomController::class,'salvar']);
     });
 
