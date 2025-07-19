@@ -41,7 +41,8 @@
             }
         }
 
-        public function salvar(CupomRequest $dados): JsonResponse {
+        public function salvar(CupomRequest $dados): JsonResponse 
+        {
              try {                                                      
                 $cupom = $this->model->create($dados->all());   
                 
@@ -49,6 +50,28 @@
             } catch(\Exception $e) {
                 $message = new ApiMessages("Ocorreu um erro, a operção não foi realizada",$e->getMessage());
                 response()->json(['error' => $message->getMessage()], 500);
+            }
+        }
+
+        public function atualizar(int $id, CupomRequest $request): JsonResponse 
+        {
+            try {
+                
+                $cupom = $this->model->find($id);
+
+                $dados = $request->all();
+
+                $cupom->nome = $dados['nome'];
+                $cupom->desconto = $dados['desconto'];
+                $cupom->validade = $dados['validade'];
+
+                $cupom->save();
+
+                return response()->json($cupom, 200);
+                            
+            } catch(\Exception $e) {
+                $message = new ApiMessages("Ocorreu um erro, a operção não foi realizada",$e->getMessage());
+                return response()->json(['error' => $message->getMessage()], 500);
             }
         }
     }

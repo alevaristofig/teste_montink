@@ -31,4 +31,9 @@ class CupomController extends Controller
 
        return $result;
     }
+
+    public function atualizar(CupomRequest $request, int $id): JsonResponse
+    {
+        return $this->service->atualizar($id, $request);
+    }
 }
