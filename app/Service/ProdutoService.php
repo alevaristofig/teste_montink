@@ -111,7 +111,7 @@
         public function deletar(int $id): JsonResponse {
             try {
                 $produto = $this->model->find($id);
-dd($produto->estoques()->delete());exit;
+
                 $produto->estoques()->delete();
                 $produto->delete();
 
