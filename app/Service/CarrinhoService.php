@@ -89,10 +89,11 @@
         public function adicionarCarrinho(CarrinhoRequest $dados): JsonResponse
         {
             try {
+                //dd($dados);
                     $carrinho = [];
                     $pedido = Redis::hgetall($this->nomeCarrinho); 
                     $dados = $dados->all();
-                    $dados['valor_total'] = $dados['valor_total'] * $dados['quantidade'];
+                    $dados['valor_total'] = $dados['valor_unitario'] * $dados['quantidade'];
 
                     if(count($pedido) === 0) 
                     {  

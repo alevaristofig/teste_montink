@@ -26,7 +26,7 @@ class CarrinhoRequest extends FormRequest
             'produto_id' => 'required|numeric',
             'nome' => 'required',
             'quantidade' => 'required|numeric',
-            'data' => 'required|numeric',            
+            'data' => 'required',            
             'valor_unitario' => 'required|numeric',
             'status' => 'required'
         ];

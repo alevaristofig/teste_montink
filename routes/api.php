@@ -47,7 +47,7 @@ Route::prefix('erp_gerenciamento')->group(function() {
     ], function() {  
         Route::get('/carrinho',[CarrinhoController::class,'listarCarrinho']);     
         Route::post('/carrinho',[CarrinhoController::class,'retirarItem']);
-        Route::post('/carrinho',[adicionarCarrinho::class,'adicionarCarrinho']);
+        Route::post('/carrinho',[CarrinhoController::class,'adicionarCarrinho']);
         Route::delete('/carrinho',[CarrinhoController::class,'removerCarrinho']);
     });
 });
