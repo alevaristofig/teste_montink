@@ -55,9 +55,9 @@
                     {
                             unset($produtosCarrinho[$i]);
                     }
-                }
+                }                
             
-                $carrinho['pedido'] = json_encode($produtosCarrinho); 
+                $carrinho['pedido'] = json_encode($this->formatarArray($produtosCarrinho)); 
 
                 Redis::hmset($this->nomeCarrinho,$carrinho);
                 
@@ -88,8 +88,7 @@
 
         public function adicionarCarrinho(CarrinhoRequest $dados): JsonResponse
         {
-            try {
-                //dd($dados);
+            try {                
                     $carrinho = [];
                     $pedido = Redis::hgetall($this->nomeCarrinho); 
                     $dados = $dados->all();
@@ -103,7 +102,7 @@
                         $produtos = Redis::hget($this->nomeCarrinho,'pedido');                         
                         $produtos = json_decode($produtos,true);                        
                         $i = array_key_last($produtos);                       
-                        $produtos[$i+1] = $dados;                       
+                        $produtos[$i+1] = $dados;                                             
                         $carrinho['pedido'] = json_encode($produtos);  
                     }
 
@@ -114,5 +113,24 @@
                 $message = new ApiMessages("Ocorreu um erro, a operção não foi realizada",$e->getMessage());
                 return response()->json(['error' => $message->getMessage()], 500);
             }
+        }
+
+        private function formatarArray($dados) 
+        {
+            $produtosCarrinho = [];
+            foreach($dados AS $key => $value) {                
+                                                    
+                    $produtosCarrinho[] = [
+                        "id_user" => $value['id_user'],
+                        "produto_id" => $value['produto_id'],
+                        "nome" => $value['nome'],
+                        "quantidade" => $value['quantidade'],
+                        "data" => $value['data'],            
+                        "valor_unitario" => $value['valor_unitario'],
+                        "status" => $value['status']
+                    ];                                
+            }
+
+            return $produtosCarrinho;
         }
     }
