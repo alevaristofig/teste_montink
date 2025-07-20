@@ -29,6 +29,7 @@
                   
                     if (count($carrinho) == 0) 
                     {
+                        dd($carrinho);
                         return response()->json([], 200);
                     }  
                 
@@ -62,6 +63,22 @@
                     Redis::hmset($this->nomeCarrinho,$carrinho);
 
                     return response()->json(['msg' => "Produto adicionado com Sucesso"], 200); 
+            } catch(\Exception $e) {
+                $message = new ApiMessages("Ocorreu um erro, a operção não foi realizada",$e->getMessage());
+                return response()->json(['error' => $message->getMessage()], 500);
+            }
+        }
+
+        public function removerCarrinho(): JsonResponse
+        {
+            try {
+
+                if(Redis::del($this->nomeCarrinho)) {
+                    return response()->json(['msg' => "Produto removidos do carrinho com Sucesso"], 200);
+                } else {
+                    return response()->json(['msg' => "O carrinho está vazio"], 200);
+                }           
+                
             } catch(\Exception $e) {
                 $message = new ApiMessages("Ocorreu um erro, a operção não foi realizada",$e->getMessage());
                 return response()->json(['error' => $message->getMessage()], 500);

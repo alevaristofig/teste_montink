@@ -39,5 +39,6 @@ Route::prefix('erp_gerenciamento')->group(function() {
     ], function() {      
         Route::get('/pedido',[PedidoController::class,'listar']);
         Route::post('/pedido',[PedidoController::class,'realizarPedidos']);
+        Route::delete('/pedido',[PedidoController::class,'removerCarrinho']);
     });
 });
