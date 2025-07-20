@@ -20,4 +20,9 @@ class CarrinhoController extends Controller
     {
         return $this->service->retirarItem($request); 
     }
+
+    public function removerCarrinho(): JsonResponse 
+    {
+        return $this->service->removerCarrinho(); 
+    }
 }

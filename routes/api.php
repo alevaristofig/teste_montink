@@ -39,8 +39,7 @@ Route::prefix('erp_gerenciamento')->group(function() {
        // 'middleware'=> \Tymon\JWTAuth\Http\Middleware\Authenticate::class
     ], function() {      
         Route::get('/pedido',[PedidoController::class,'listar']);
-        Route::post('/pedido',[PedidoController::class,'realizarPedidos']);
-        Route::delete('/pedido',[PedidoController::class,'removerCarrinho']);
+        Route::post('/pedido',[PedidoController::class,'realizarPedidos']);        
     });
 
     Route::group([
@@ -49,6 +48,6 @@ Route::prefix('erp_gerenciamento')->group(function() {
     ], function() {      
         Route::post('/carrinho',[CarrinhoController::class,'retirarItem']);
         //Route::post('/pedido',[PedidoController::class,'realizarPedidos']);
-       // Route::delete('/pedido',[PedidoController::class,'removerCarrinho']);
+        Route::delete('/pedido',[CarrinhoController::class,'removerCarrinho']);
     });
 });

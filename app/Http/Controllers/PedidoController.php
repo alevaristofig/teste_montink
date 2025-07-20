@@ -25,9 +25,4 @@ class PedidoController extends Controller
     {
         return $this->service->realizarPedidos($request); 
     }
-
-     public function removerCarrinho(): JsonResponse 
-    {
-        return $this->service->removerCarrinho(); 
-    }
 }
