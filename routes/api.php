@@ -48,6 +48,6 @@ Route::prefix('erp_gerenciamento')->group(function() {
     ], function() {      
         Route::post('/carrinho',[CarrinhoController::class,'retirarItem']);
         //Route::post('/pedido',[PedidoController::class,'realizarPedidos']);
-        Route::delete('/pedido',[CarrinhoController::class,'removerCarrinho']);
+        Route::delete('/carrinho',[CarrinhoController::class,'removerCarrinho']);
     });
 });
