@@ -12,7 +12,7 @@
 
     class PedidoService implements PedidoRepository {
 
-         private $nomeCarrinho;
+        private $nomeCarrinho;
 
         public function __construct() 
         {
@@ -49,10 +49,10 @@
                     $dados['valor_total'] = $dados['valor_total'] * $dados['quantidade'];
 
                     if(count($pedido) === 0) 
-                    {   
+                    {  
                         $dados = [$dados];
                         $carrinho['pedido'] = json_encode($dados);                      
-                    } else {                        
+                    } else {                                               
                         $produtos = Redis::hget($this->nomeCarrinho,'pedido');                         
                         $produtos = json_decode($produtos,true);                        
                         $i = array_key_last($produtos);                       

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\CupomController;
 use App\Http\Controllers\PedidoController;
+use App\Http\Controllers\CarrinhoController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -33,12 +34,21 @@ Route::prefix('erp_gerenciamento')->group(function() {
         Route::delete('/cupom/{id}',[CupomController::class,'deletar']);
     });
 
-     Route::group([
+    Route::group([
         'as' => 'pedido'
        // 'middleware'=> \Tymon\JWTAuth\Http\Middleware\Authenticate::class
     ], function() {      
         Route::get('/pedido',[PedidoController::class,'listar']);
         Route::post('/pedido',[PedidoController::class,'realizarPedidos']);
         Route::delete('/pedido',[PedidoController::class,'removerCarrinho']);
+    });
+
+    Route::group([
+        'as' => 'carrinho'
+       // 'middleware'=> \Tymon\JWTAuth\Http\Middleware\Authenticate::class
+    ], function() {      
+        Route::post('/carrinho',[CarrinhoController::class,'retirarItem']);
+        //Route::post('/pedido',[PedidoController::class,'realizarPedidos']);
+       // Route::delete('/pedido',[PedidoController::class,'removerCarrinho']);
     });
 });
