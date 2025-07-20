@@ -39,6 +39,8 @@
                 }
             
                 $carrinho['pedido'] = json_encode($produtosCarrinho); 
+
+                Redis::hmset($this->nomeCarrinho,$carrinho);
                 
                 return response()->json(['msg' => "Produto retirado do carrinho com Sucesso"], 200); 
 
