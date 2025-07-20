@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CarrinhoRequest extends FormRequest
+class CarrinhoItemRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,13 +22,9 @@ class CarrinhoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id_user' => 'required|numeric',
             'produto_id' => 'required|numeric',
             'nome' => 'required',
-            'quantidade' => 'required|numeric',
-            'data' => 'required|numeric',            
-            'valor_unitario' => 'required|numeric',
-            'status' => 'required'
+            'data' => 'required',
         ];
     }
 }

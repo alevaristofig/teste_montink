@@ -4,7 +4,7 @@
 
     use App\Repository\CarrinhoRepository;
     use App\Http\Requests\CarrinhoRequest;
- //   use App\Models\Estoque;
+    use App\Http\Requests\CarrinhoItemRequest;
     use App\Exceptions\ApiMessages;
     use Illuminate\Http\JsonResponse;
     use Illuminate\Database\Eloquent\Collection;
@@ -22,7 +22,24 @@
            $this->nomeCarrinho = 'carrinho_teste';
         }
 
-        public function retirarItem(CarrinhoRequest $request): JsonResponse
+        public function listarCarrinho(): JsonResponse 
+        {
+            try {
+                    $carrinho = Redis::hgetall($this->nomeCarrinho); 
+                  
+                    if (count($carrinho) == 0) 
+                    {
+                        return response()->json([], 200);
+                    }  
+                
+                    return response()->json(json_decode($carrinho['pedido'],true), 200);
+            } catch(\Exception $e) {
+                $message = new ApiMessages("Ocorreu um erro, a operção não foi realizada",$e->getMessage());
+                return response()->json(['error' => $message->getMessage()], 500);
+            }
+        }
+
+        public function retirarItem(CarrinhoItemRequest $request): JsonResponse
         {
             try {
 
@@ -69,7 +86,7 @@
             }
         }
 
-        public function adicionarCarrinho(PedidoRequest $dados): JsonResponse
+        public function adicionarCarrinho(CarrinhoRequest $dados): JsonResponse
         {
             try {
                     $carrinho = [];

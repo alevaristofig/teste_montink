@@ -21,22 +21,4 @@
           //  $this->nomeCarrinho = 'carrinho:'.auth('api')->user()->email;
            $this->nomeCarrinho = 'carrinho_teste';
         }
-
-        public function listarPedidos(): JsonResponse 
-        {
-            try {
-                    $carrinho = Redis::hgetall($this->nomeCarrinho); 
-                  
-                    if (count($carrinho) == 0) 
-                    {
-                        dd($carrinho);
-                        return response()->json([], 200);
-                    }  
-                
-                    return response()->json(json_decode($carrinho['pedido'],true), 200);
-            } catch(\Exception $e) {
-                $message = new ApiMessages("Ocorreu um erro, a operção não foi realizada",$e->getMessage());
-                return response()->json(['error' => $message->getMessage()], 500);
-            }
-        }
     }

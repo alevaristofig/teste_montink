@@ -44,9 +44,10 @@ Route::prefix('erp_gerenciamento')->group(function() {
     Route::group([
         'as' => 'carrinho'
        // 'middleware'=> \Tymon\JWTAuth\Http\Middleware\Authenticate::class
-    ], function() {      
+    ], function() {  
+        Route::get('/carrinho',[CarrinhoController::class,'listarCarrinho']);     
         Route::post('/carrinho',[CarrinhoController::class,'retirarItem']);
-        Route::post('/pedido',[adicionarCarrinho::class,'adicionarCarrinho']);
+        Route::post('/carrinho',[adicionarCarrinho::class,'adicionarCarrinho']);
         Route::delete('/carrinho',[CarrinhoController::class,'removerCarrinho']);
     });
 });

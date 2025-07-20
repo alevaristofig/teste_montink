@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Service\CarrinhoService;
 use App\Http\Requests\CarrinhoRequest;
+use App\Http\Requests\CarrinhoItemRequest;
 
 class CarrinhoController extends Controller
 {
@@ -16,7 +17,12 @@ class CarrinhoController extends Controller
         $this->service = $service;
     }
 
-    public function retirarItem(CarrinhoRequest $request): JsonResponse
+    public function listarCarrinho(): JsonResponse
+    {
+        return $this->service->listarCarrinho();        
+    }  
+
+    public function retirarItem(CarrinhoItemRequest $request): JsonResponse
     {
         return $this->service->retirarItem($request); 
     }
@@ -26,7 +32,7 @@ class CarrinhoController extends Controller
         return $this->service->removerCarrinho(); 
     }
 
-    public function adicionarCarrinho(PedidoRequest $request): JsonResponse 
+    public function adicionarCarrinho(CarrinhoRequest $request): JsonResponse 
     {
         return $this->service->adicionarCarrinho($request); 
     }
