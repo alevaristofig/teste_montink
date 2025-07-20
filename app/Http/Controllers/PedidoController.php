@@ -19,10 +19,5 @@ class PedidoController extends Controller
     public function listar(): JsonResponse
     {
         return $this->service->listarPedidos();        
-    }
-
-    public function realizarPedidos(PedidoRequest $request): JsonResponse 
-    {
-        return $this->service->realizarPedidos($request); 
-    }
+    }    
 }

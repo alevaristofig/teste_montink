@@ -11,6 +11,7 @@
         
       public function removerCarrinho(): JsonResponse;
       public function retirarItem(CarrinhoRequest $request): JsonResponse;
+      public function adicionarCarrinho(PedidoRequest $request): JsonResponse;
        // public function listarPedidos(): JsonResponse;
        // public function realizarPedidos(PedidoRequest $request): JsonResponse;
         //public function buscar(int $id): Produtos;        
