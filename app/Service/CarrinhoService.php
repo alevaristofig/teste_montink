@@ -3,7 +3,7 @@
     namespace App\Service;
 
     use App\Repository\CarrinhoRepository;
-   // use App\Http\Requests\PedidoRequest;
+    use App\Http\Requests\CarrinhoRequest;
  //   use App\Models\Estoque;
     use App\Exceptions\ApiMessages;
     use Illuminate\Http\JsonResponse;
@@ -12,7 +12,7 @@
 
     class CarrinhoService implements CarrinhoRepository 
     {
-        public function retirarItem(int $produto_id, string $data): JsonResponse
+        public function retirarItem(CarrinhoRequest $request): JsonResponse
         {
             $produtos = Redis::hget($this->nomeCarrinho,'produtos');   
         }

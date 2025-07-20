@@ -2,14 +2,14 @@
 
     namespace App\Repository;
 
-    use App\Http\Requests\PedidoRequest;
+    use App\Http\Requests\CarrinhoRequest;
   //  use App\Models\Estoque;
     use Illuminate\Http\JsonResponse;
     use Illuminate\Database\Eloquent\Collection;
 
     interface CarrinhoRepository {
         
-        public function retirarItem(int $id): JsonResponse;
+        public function retirarItem(CarrinhoRequest $request): JsonResponse;
        // public function listarPedidos(): JsonResponse;
        // public function realizarPedidos(PedidoRequest $request): JsonResponse;
         //public function buscar(int $id): Produtos;        

@@ -16,8 +16,8 @@ class CarrinhoController extends Controller
         $this->service = $service;
     }
 
-    public function retirarItem(): JsonResponse
+    public function retirarItem(CarrinhoRequest $request): JsonResponse
     {
-        return $this->service->retirarItem(); 
+        return $this->service->retirarItem($request); 
     }
 }
