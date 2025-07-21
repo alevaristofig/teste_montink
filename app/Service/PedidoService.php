@@ -23,6 +23,18 @@
            $this->nomeCarrinho = 'carrinho_teste';
         }
 
+        public function listar(): JsonResponse
+        {
+            try {                                                      
+                  $pedidos = $this->model->all();   
+                
+                  return response()->json($pedidos, 201);
+            } catch(\Exception $e) {
+                $message = new ApiMessages("Ocorreu um erro, a operção não foi realizada",$e->getMessage());
+                response()->json(['error' => $message->getMessage()], 500);
+            }
+        }
+
         public function confirmar(PedidoRequest $dados): JsonResponse
         {
             try {                                                      

@@ -37,7 +37,8 @@ Route::prefix('erp_gerenciamento')->group(function() {
     Route::group([
         'as' => 'pedido'
        // 'middleware'=> \Tymon\JWTAuth\Http\Middleware\Authenticate::class
-    ], function() {      
+    ], function() {    
+        Route::get('/pedido',[PedidoController::class,'listar']);  
         Route::post('/pedido',[PedidoController::class,'confirmar']);               
     });
 

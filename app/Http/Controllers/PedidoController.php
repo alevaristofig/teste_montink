@@ -14,10 +14,15 @@ class PedidoController extends Controller
     public function __construct(PedidoService $service) 
     {
         $this->service = $service;
-    }   
+    } 
+    
+    public function listar(): JsonResponse
+    {
+        return $this->service->listar();
+    }
     
     public function confirmar(PedidoRequest $request): JsonResponse
     {
-        return $this->service->confirmar($id);
+        return $this->service->confirmar($request);
     }
 }

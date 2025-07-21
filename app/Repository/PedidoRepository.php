@@ -10,8 +10,8 @@
     interface PedidoRepository {
         
        public function confirmar(PedidoRequest $request): JsonResponse;
-       // public function atualizar(int $id, Array $request): bool;
-       // public function listarPedidos(): JsonResponse;        
+       public function listar(): JsonResponse;  
+       // public function atualizar(int $id, Array $request): bool;             
         //public function buscar(int $id): Produtos;        
        // public function deletar(int $id): void;*/       
     }
