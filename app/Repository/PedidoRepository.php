@@ -11,7 +11,5 @@
         
        public function confirmar(PedidoRequest $request): JsonResponse;
        public function listar(): JsonResponse;  
-       public function atualizarStatus(int $id, Request $request): JsonResponse;             
-        //public function buscar(int $id): Produtos;        
-       // public function deletar(int $id): void;*/       
+       public function atualizarStatus(int $id, Request $request): JsonResponse;                  
     }
