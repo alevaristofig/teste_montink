@@ -25,4 +25,9 @@ class PedidoController extends Controller
     {
         return $this->service->confirmar($request);
     }
+
+    public function atualizarStatus(int $id,Request $request): JsonResponse
+    {        
+        return $this->service->atualizarStatus($id,$request);
+    }
 }

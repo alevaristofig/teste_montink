@@ -6,6 +6,7 @@
     use App\Http\Requests\PedidoRequest;
     use App\Models\Pedido;
     use App\Exceptions\ApiMessages;
+    use Illuminate\Http\Request;
     use Illuminate\Http\JsonResponse;
     use Illuminate\Database\Eloquent\Collection;
     use Illuminate\Support\Facades\Redis;    
@@ -44,6 +45,26 @@
             } catch(\Exception $e) {
                 $message = new ApiMessages("Ocorreu um erro, a operção não foi realizada",$e->getMessage());
                 response()->json(['error' => $message->getMessage()], 500);
+            }
+        }
+
+        public function atualizarStatus(int $id, Request $request): JsonResponse
+        {
+            try {
+                
+                $pedido = $this->model->find($id);
+
+                $dados = $request->all();
+
+                $pedido->status = $dados['status'];
+
+                $pedido->save();
+
+                return response()->json(['msg' => 'Status atualizado com sucesso'], 200);
+                            
+            } catch(\Exception $e) {
+                $message = new ApiMessages("Ocorreu um erro, a operção não foi realizada",$e->getMessage());
+                return response()->json(['error' => $message->getMessage()], 500);
             }
         }
     }

@@ -3,7 +3,7 @@
     namespace App\Repository;
 
     use App\Http\Requests\PedidoRequest;
-  //  use App\Models\Estoque;
+    use Illuminate\Http\Request;
     use Illuminate\Http\JsonResponse;
     use Illuminate\Database\Eloquent\Collection;
 
@@ -11,7 +11,7 @@
         
        public function confirmar(PedidoRequest $request): JsonResponse;
        public function listar(): JsonResponse;  
-       // public function atualizar(int $id, Array $request): bool;             
+       public function atualizarStatus(int $id, Request $request): JsonResponse;             
         //public function buscar(int $id): Produtos;        
        // public function deletar(int $id): void;*/       
     }
