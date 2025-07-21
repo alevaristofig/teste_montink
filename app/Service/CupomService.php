@@ -43,7 +43,7 @@
 
         public function salvar(CupomRequest $dados): JsonResponse 
         {
-             try {                                                      
+            try {                                                      
                 $cupom = $this->model->create($dados->all());   
                 
                 return response()->json($cupom, 201);
