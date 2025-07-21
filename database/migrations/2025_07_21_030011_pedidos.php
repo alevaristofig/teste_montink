@@ -19,7 +19,8 @@ return new class extends Migration
             $table->float('valor_total',10,2);
             $table->integer('quantidade'); 
             $table->integer('valor_frete');   
-            $table->integer('desconto');   
+            $table->integer('desconto'); 
+            $table->string('endereco');  
             $table->string('status');      
                        
             $table->timestamps();      
