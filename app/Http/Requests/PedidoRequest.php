@@ -22,11 +22,12 @@ class PedidoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "id_user" => 'required',
-            "produto_id" => 'required',
-            "quantidade" => 'required|numeric',
-            "data" => 'required',            
-            "valor_total" => 'required',
+            "id_usuario" => 'required',
+            "produtos" => 'required',
+            "valor_total" => 'required|numeric',
+            "quantidade" => 'required|numeric',            
+            "valor_frete" => 'required|numeric',
+            "desconto" => 'required|numeric',
             "status" => 'required'
         ];
     }
