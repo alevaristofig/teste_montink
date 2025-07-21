@@ -28,6 +28,7 @@ class PedidoRequest extends FormRequest
             "quantidade" => 'required|numeric',            
             "valor_frete" => 'required|numeric',
             "desconto" => 'required|numeric',
+            "endereco" => 'required',
             "status" => 'required'
         ];
     }

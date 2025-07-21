@@ -8,7 +8,7 @@ class Pedido extends Model
 {
     
     protected $fillable = [
-        "id_usuario", "produtos", "valor_total", "quantidade", "valor_frete",
+        "id_usuario", "produtos", "valor_total", "quantidade", "endereco", "valor_frete",
         "desconto", "status"
     ];
 }

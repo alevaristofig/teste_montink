@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Service\PedidoService;
 use App\Http\Requests\PedidoRequest;
+use App\Mail\SendMail;
+ use Illuminate\Support\Facades\Mail;
 
 class PedidoController extends Controller
 {
@@ -22,7 +24,7 @@ class PedidoController extends Controller
     }
     
     public function confirmar(PedidoRequest $request): JsonResponse
-    {
+    {         
         return $this->service->confirmar($request);
     }
 
