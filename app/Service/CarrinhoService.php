@@ -16,10 +16,7 @@
 
         public function __construct() 
         {
-           // $this->model = $model;
-           // $this->produto = $produto;
-          //  $this->nomeCarrinho = 'carrinho:'.auth('api')->user()->email;
-           $this->nomeCarrinho = 'carrinho_teste';
+            $this->nomeCarrinho = 'carrinho:'.auth('api')->user()->email;
         }
 
         public function listarCarrinho(): JsonResponse 

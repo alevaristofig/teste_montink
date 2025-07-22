@@ -15,10 +15,11 @@ Route::get('/user', function (Request $request) {
 Route::prefix('erp_gerenciamento')->group(function() {
 
      Route::post('/autenticacao',[LoginJwtController::class,'login'])->name('login');
+     Route::get('/logout',[LoginJwtController::class,'logout'])->name('logout');
 
     Route::group([
-        'as' => 'produto'
-       // 'middleware'=> \Tymon\JWTAuth\Http\Middleware\Authenticate::class
+        'as' => 'produto',
+        'middleware'=> \Tymon\JWTAuth\Http\Middleware\Authenticate::class
     ], function() {      
         Route::get('/produto',[ProdutoController::class,'listar']);
         Route::post('/produto',[ProdutoController::class,'salvar']);
@@ -28,8 +29,8 @@ Route::prefix('erp_gerenciamento')->group(function() {
     });
 
     Route::group([
-        'as' => 'cupom'
-       // 'middleware'=> \Tymon\JWTAuth\Http\Middleware\Authenticate::class
+        'as' => 'cupom',
+        'middleware'=> \Tymon\JWTAuth\Http\Middleware\Authenticate::class
     ], function() {      
         Route::get('/cupom',[CupomController::class,'listar']);
         Route::get('/cupom/{id}',[CupomController::class,'buscar']);
@@ -39,8 +40,8 @@ Route::prefix('erp_gerenciamento')->group(function() {
     });
 
     Route::group([
-        'as' => 'pedido'
-       // 'middleware'=> \Tymon\JWTAuth\Http\Middleware\Authenticate::class
+        'as' => 'pedido',
+        'middleware'=> \Tymon\JWTAuth\Http\Middleware\Authenticate::class
     ], function() {    
         Route::get('/pedido',[PedidoController::class,'listar']);  
         Route::post('/pedido',[PedidoController::class,'confirmar']); 
@@ -48,8 +49,8 @@ Route::prefix('erp_gerenciamento')->group(function() {
     });
 
     Route::group([
-        'as' => 'carrinho'
-       // 'middleware'=> \Tymon\JWTAuth\Http\Middleware\Authenticate::class
+        'as' => 'carrinho',
+        'middleware'=> \Tymon\JWTAuth\Http\Middleware\Authenticate::class
     ], function() {  
         Route::get('/carrinho',[CarrinhoController::class,'listarCarrinho']);     
         Route::post('/carrinhoitem',[CarrinhoController::class,'retirarItem']);

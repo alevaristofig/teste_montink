@@ -12,7 +12,6 @@
     use Illuminate\Http\JsonResponse;
     use Illuminate\Database\Eloquent\Collection;
     use Illuminate\Support\Facades\Redis; 
-    //use Mail;   
     use Illuminate\Support\Facades\Mail;
 
     class PedidoService implements PedidoRepository {
@@ -25,14 +24,12 @@
         {
             $this->model = $model;
             $this->modelProduto = $modelProduto;
-           // $this->produto = $produto;
-          //  $this->nomeCarrinho = 'carrinho:'.auth('api')->user()->email;
-           $this->nomeCarrinho = 'carrinho_teste';
+            $this->nomeCarrinho = 'carrinho:'.auth('api')->user()->email;
         }
 
         public function listar(): JsonResponse
         {
-            try {                                                      
+            try {                                                           
                   $pedidos = $this->model->where('id_usuario',1)->get(); 
                   $ids = '';
 
@@ -61,6 +58,8 @@
                   $pedido = $this->model->create($dados->all());
                   
                   $mensagem = 'Seu pedido foi registrado e em breve será envia para o endereço '.$endereco;
+
+                  Redis::del($this->nomeCarrinho);
                 
                   $this->enviarEmail($mensagem);
                   return response()->json($pedido, 201);
@@ -94,11 +93,11 @@
         {
             try {
                 $data = [
-                    'name' => '',
+                    'name' => auth('api')->user()->name,
                     'message' => $mesagem
                 ];
  
-                Mail::to("alevaristofig@gmail.com")->send(new SendMail($data));
+                Mail::to(auth('api')->user()->email)->send(new SendMail($data));
             } catch(\Exception $e) {
                 dd($e->getMessage());
             }
