@@ -6,12 +6,16 @@ use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\CupomController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\CarrinhoController;
+use App\Http\Controllers\Auth\LoginJwtController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
 Route::prefix('erp_gerenciamento')->group(function() {
+
+     Route::post('/autenticacao',[LoginJwtController::class,'login'])->name('login');
+
     Route::group([
         'as' => 'produto'
        // 'middleware'=> \Tymon\JWTAuth\Http\Middleware\Authenticate::class
